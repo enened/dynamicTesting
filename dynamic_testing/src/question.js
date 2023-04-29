@@ -5,6 +5,7 @@ function Question(props){
     const [correctAnswer, setCorrectAnswer] = useState(false)
     const [explanation, setExplanation] = useState("")
 
+    // check users answer, change score, and display correct answers
     const checkAnswer = (key)=>{
         setDisplayAnswer(true);
         setExplanation(props.question.explanation)
@@ -23,11 +24,13 @@ function Question(props){
     return(
         <div className="questionSlide">
 
+            {/* color question red or green based of whether user answered correctly */}
             {displayAnswer ? <p className="question" style={correctAnswer ? {'color': 'rgb(146, 226, 202)'} : {'color': 'rgb(255, 137, 137)'}}>{props.index + 1}. {props.question.question}</p> 
             :
             <p className="question">{props.index + 1}. {props.question.question}</p> 
             }
 
+            {/* Show answer choices */}
             {Object.keys(props.question.answerChoices).map((key, index)=>{
 
                 return (

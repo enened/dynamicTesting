@@ -8,6 +8,7 @@ function Login(props){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    // send login info to backend
     const login = (e)=>{
         e.preventDefault()
         if (username.trim().length > 0 && password.trim().length > 0){
@@ -24,6 +25,7 @@ function Login(props){
     }
     
     return(
+        // show login input boxes
         <div>
             <h2>Login</h2>
             <form onSubmit={login}>

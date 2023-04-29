@@ -34,6 +34,7 @@ function Home(){
         } 
     }
 
+    // get list of user's saved tests
     const getTests = ()=>{
         if (userId){
             axios.post("http://127.0.0.1:5000/getTests", {userId: userId}).then((response)=>{
@@ -42,6 +43,7 @@ function Home(){
         }
     }
 
+    // get test questions, answer choices, and explanations from database if clicking on a saved test
     const getTestInfo = (testId, testName)=>{
         axios.post("http://127.0.0.1:5000/getTestInfo", {testId: testId}).then((response)=>{
             setTest(response.data)
@@ -50,7 +52,7 @@ function Home(){
         })
     }
 
-
+    // get saved tests list when userId changes
     useEffect(()=>{
         getTests()
     }, [userId])
@@ -69,9 +71,10 @@ function Home(){
                  
                 <h1 style={{'margin':'auto'}}>Test Maker Pro</h1>
 
-                {/* Login and sign up buttons */}
+                
                 {!userId ? 
                     <>
+                        {/* Login and sign up buttons */}
                         {page != 'login' ? 
                             <button onClick={()=>{setPage('login')}} className='loginButton'>Login</button>
                             :                 
@@ -87,6 +90,7 @@ function Home(){
 
                     :
                     <>
+                        {/* Logout and saved tests buttons */}
                         <button className='loginButton' onClick={()=>{setUserId()}}>Logout</button>
                         {page != 'savedTests' ? 
                             <button className='helpButton' onClick={()=>{setPage('savedTests'); getTests()}}>Saved Tests</button>
@@ -117,6 +121,8 @@ function Home(){
                     {test && 
                         <>
                             <Test test={test} testName = {testType}/>
+
+                            {/* button to generate new test with same topic */}
                             <button className="normalButton" onClick={(e)=>{getTest(e, testType)}}>Generate new test</button>
                         </>
                     }
@@ -124,7 +130,7 @@ function Home(){
             }
 
             
-            {/* show loading */}
+            {/* show loading when retrieving test */}
             {loading && <p className='inform'>Loading...</p>}
 
             {/* show help page */}
@@ -136,6 +142,7 @@ function Home(){
             {/* show signup page */}
             {page == 'signup' && <Signup/>}
 
+            {/* show saved tests */}
             {page == 'savedTests' && 
                 <>
                     <h2>Saved Tests: </h2>

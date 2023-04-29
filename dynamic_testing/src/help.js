@@ -1,5 +1,7 @@
+
 function Help(){
     return(
+        // help page with information on the website
         <div>
             <div>
                 <h2>Help</h2>

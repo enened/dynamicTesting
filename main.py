@@ -1,3 +1,4 @@
+# import necesarry libraries
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -10,6 +11,7 @@ import json
 openai.api_key = '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'
 import mysql.connector
 
+# connect with MySQL database
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -59,14 +61,16 @@ def signup():
     # data from frontend
     data = request.get_json()
     mycursor = mydb.cursor()
+
+    # check if user with same username exists
     mycursor.execute("SELECT userId FROM login where username = %s", (data['username'],))
     result = mycursor.fetchall()
     if len(result) > 0:
         return jsonify({'error': 'Username already exists'})
     else:
 
+        # make new login if no user with same username exists 
         mycursor.execute("INSERT INTO login (username, password) VALUES (%s, %s)", (data['username'], data['password']))
-
         mydb.commit()
 
     # return userId
@@ -99,6 +103,7 @@ def saveTest():
     data = request.get_json()
     test = data['test']
 
+    # insert test into MySQL database
     mycursor = mydb.cursor()
     mycursor.execute("INSERT INTO tests (userId, testName, gottenCorrect) VALUES (%s, %s, %s)", (data['userId'], data['testName'], data['score']))
     testId = mycursor.lastrowid
@@ -108,10 +113,8 @@ def saveTest():
         for answerChoice in test[key]['answerChoices']:
             mycursor.execute("INSERT INTO answerchoices (questionId, answerChoice, correctAnswer) VALUES (%s, %s, %s)", (questionId, test[key]['answerChoices'][answerChoice]['answerChoice'], test[key]['answerChoices'][answerChoice]['correctAnswer']))
 
-
     mydb.commit()
 
-    print(test)
 
     return 'ok'
 
@@ -126,7 +129,6 @@ def getTests():
     mycursor = mydb.cursor()
     mycursor.execute("select * from tests where userId = %s", (data['userId'],))
     result = mycursor.fetchall()
-    print(result)
 
     return result
 
@@ -139,16 +141,21 @@ def getTestInfo():
     data = request.get_json()
     test = {}
     mycursor = mydb.cursor()
+
+    # select all questions from database and add them to test
     mycursor.execute("select * from questions where testId = %s", (data['testId'],))
     results = mycursor.fetchall()
+
     for i, result in enumerate(results):
         test[i] = {'question': result[2], 'explanation': result[3], 'answerChoices': {}}
         mycursor.execute("select * from answerChoices where questionId = %s", (result[0],))
         answerChoices = mycursor.fetchall()
+                
+        # select all answer choices from database and add them to test
         for answerLetter, answerChoice in zip(['A', 'B', 'C', 'D'], answerChoices):
             test[i]['answerChoices'][answerLetter] = {'answerChoice': answerChoice[2], 'correctAnswer': answerChoice[3]}
 
-    return  test
+    return test
 
 
 if __name__ == '__main__':

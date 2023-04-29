@@ -7,7 +7,7 @@ function Signup(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-
+    // send sign up info to backend
     const signup = (e)=>{
         e.preventDefault()
         if (username.trim().length > 0 && password.trim().length > 0){
@@ -23,6 +23,7 @@ function Signup(){
         } 
     }
     
+    // sign up inputs
     return(
         <div>
             <h2>Sign up</h2>

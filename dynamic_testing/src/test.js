@@ -7,8 +7,9 @@ function Test(props){
     const {userId} = useContext(Context)
     const [score, setScore] = useState(0)
 
+
+    // send test info to backend to save in database
     const saveTest = ()=>{
-        console.log(props.test)
         axios.post("http://127.0.0.1:5000/saveTest", {userId: userId, test: props.test, testName: props.testName, score: score + '/' + Object.keys(props.test).length}).then((response)=>{
             if (response.data == 'ok'){
                 alert('Successfully saved')
@@ -18,16 +19,23 @@ function Test(props){
 
     return(
         <div>  
+            {/* show test name */}
             <h2>{props.testName.charAt(0).toUpperCase()+props.testName.slice(1)}</h2>
+            
+            {/* show test questions */}
             {Object.keys(props.test).map((key, index)=>{
-                console.log(key, index, props.test[key])
+
                 return (
                     <div key={index}>
                         <Question question = {props.test[key]} index = {index} setScore = {setScore}/>
                     </div>
                   );
             })}
+
+            {/* show score */}
             <p>{score} / {Object.keys(props.test).length}</p>
+
+            {/* show save test button if logged in */}
             {userId && <button className="normalButton" onClick={saveTest}>Save test</button>}
         </div>
     )
