@@ -1,0 +1,160 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1{
+  color: rgb(4, 105, 206);
+  font-size: 250%;
+}
+
+
+.searchBar{
+  width: 40%;
+  height: 30px;
+  margin: 10px;
+  border: 2px solid rgb(4, 105, 206);
+  border-radius: 3px;
+}
+
+::placeholder{
+  text-align: center;
+}
+
+#searchBarLabel{
+  font-weight: 500;
+  font-size: 130%;
+}
+
+#searchBarDiv{
+  margin: 50px;
+}
+
+.normalButton{
+  padding: 12px;
+  background-color: rgb(4, 105, 206);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  margin: 20px;
+}
+
+
+.inform{
+  color: gray;
+}
+
+.questionSlide{
+  width: 90%;
+  max-width: 1000px;
+  background-color: rgb(4, 105, 206);
+  color: white;
+  border-radius: 5px;
+  padding: 50px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.answerChoiceSlides{
+  background-color: white;
+  color: black;
+  width: 70%;
+  padding: 10px;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+p{
+  font-size: 105%;
+  letter-spacing: 3px;
+  font-weight: 200;
+}
+
+.question{
+  font-size: 130%;
+  font-weight: 400;
+
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.helpButton{
+  padding: 12px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgb(4, 105, 206);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  height: 50px;
+  margin: 30px;
+}
+
+.helpText{
+  font-size: 130%;
+  font-weight: 400;
+  margin: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+
+.loginButton{
+  padding: 12px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgb(4, 105, 206);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  height: 50px;
+  margin: 30px;
+  margin-left: 5px;
+}
+
+.loginInput{
+  border: 2px solid rgb(4, 105, 206);
+  height: 20px;
+  margin: 20px;
+  padding: 10px;
+  width: 50%;
+  max-width: 300px;
+}
+
+
+.testsListSlide{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  background-color: rgb(4, 105, 206);
+  color: white;
+  padding: 10px;
+  width: 70%;
+  border-radius: 5px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.testsSlideInfo{
+  font-size: 130%;
+  font-weight: 500;
+  margin: 50px;
+}
